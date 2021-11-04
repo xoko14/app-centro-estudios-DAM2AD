@@ -47,4 +47,7 @@ public class Profesor {
         this.idDept = idDept;
     }
 
+    public Profesor() {
+    }
+
 }

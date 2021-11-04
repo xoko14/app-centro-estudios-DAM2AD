@@ -20,4 +20,7 @@ public class Asignatura {
         this.nombre = nombre;
     }
 
+    public Asignatura() {
+    }
+
 }

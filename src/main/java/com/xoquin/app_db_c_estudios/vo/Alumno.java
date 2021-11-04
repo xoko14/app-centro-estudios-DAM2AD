@@ -49,4 +49,7 @@ public class Alumno {
         this.fecha = fecha;
     }
 
+    public Alumno() {
+    }
+
 }

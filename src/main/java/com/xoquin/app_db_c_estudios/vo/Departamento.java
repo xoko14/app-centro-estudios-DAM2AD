@@ -20,4 +20,7 @@ public class Departamento {
         this.nombre = nombre;
     }
 
+    public Departamento() {
+    }
+
 }
