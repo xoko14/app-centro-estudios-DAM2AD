@@ -2,6 +2,11 @@ package com.xoquin.app_db_c_estudios.factory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;
+import com.xoquin.app_db_c_estudios.dao.AsignaturaDAO;
+import com.xoquin.app_db_c_estudios.dao.DepartamentoDAO;
+import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
 import com.xoquin.app_db_c_estudios.pool.BasicConnectionPool;
 
 public class MariaDBDAOFactory extends DAOFactory{
@@ -14,7 +19,6 @@ public class MariaDBDAOFactory extends DAOFactory{
         try {
             bcp = BasicConnectionPool.create(url, user, password);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -38,5 +42,25 @@ public class MariaDBDAOFactory extends DAOFactory{
     @Override
     public void shutdown() throws SQLException {
         bcp.shutdown();
+    }
+
+    @Override
+    public AlumnoDAO getAlumnoDAO() {
+        return new AlumnoDAO();
+    }
+
+    @Override
+    public AsignaturaDAO getAsignaturaDAO() {
+        return new AsignaturaDAO();
+    }
+
+    @Override
+    public DepartamentoDAO gDepartamentoDAO() {
+        return new DepartamentoDAO();
+    }
+
+    @Override
+    public ProfesorDAO getProfesorDAO() {
+        return new ProfesorDAO();
     }
 }
