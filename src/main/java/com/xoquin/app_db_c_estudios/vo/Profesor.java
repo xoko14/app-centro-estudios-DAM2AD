@@ -5,7 +5,7 @@ public class Profesor {
     private String dni;
     private String nombre;
     private String apellidos;
-    private int idDept;
+    private String departamento;
 
     public int getId() {
         return this.id;
@@ -39,12 +39,12 @@ public class Profesor {
         this.apellidos = apellidos;
     }
 
-    public int getIdDept() {
-        return this.idDept;
+    public String getDepartamento() {
+        return this.departamento;
     }
 
-    public void setIdDept(int idDept) {
-        this.idDept = idDept;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
     public Profesor() {

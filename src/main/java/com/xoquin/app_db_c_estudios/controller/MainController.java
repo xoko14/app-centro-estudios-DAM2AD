@@ -39,4 +39,21 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    private void abrirBuscarProfesores(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscar_profesores.fxml"));
+        BuscarProfesoresController c = new BuscarProfesoresController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

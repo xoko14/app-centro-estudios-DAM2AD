@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.xoquin.app_db_c_estudios.factory.MariaDBDAOFactory;
-import com.xoquin.app_db_c_estudios.vo.Alumno;
+import com.xoquin.app_db_c_estudios.vo.Profesor;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,14 +22,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BuscarAlumnosController implements Initializable{
+public class BuscarProfesoresController implements Initializable{
     @FXML private Button btnInitDB;
-    @FXML private TableView<Alumno> tabAlumnos;
-    @FXML private TableColumn<Alumno, Integer> colNum;
-    @FXML private TableColumn<Alumno, String> colDNI;
-    @FXML private TableColumn<Alumno, String> colNombre;
-    @FXML private TableColumn<Alumno, String> colApellidos;
-    @FXML private TableColumn<Alumno, Date> colNac;
+    @FXML private TableView<Profesor> tabProfesores;
+    @FXML private TableColumn<Profesor, String> colDNI;
+    @FXML private TableColumn<Profesor, String> colNombre;
+    @FXML private TableColumn<Profesor, String> colApellidos;
+    @FXML private TableColumn<Profesor, Date> colDept;
     @FXML private ComboBox<String> cbxBuscarPor; 
     @FXML private TextField txtBusqueda;
 
@@ -38,13 +37,12 @@ public class BuscarAlumnosController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        colNum.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("numExp"));
-        colDNI.setCellValueFactory(new PropertyValueFactory<Alumno, String>("dni"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-        colApellidos.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellidos"));
-        colNac.setCellValueFactory(new PropertyValueFactory<Alumno, Date>("fecha"));
+        colDNI.setCellValueFactory(new PropertyValueFactory<Profesor, String>("dni"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Profesor, String>("nombre"));
+        colApellidos.setCellValueFactory(new PropertyValueFactory<Profesor, String>("apellidos"));
+        colDept.setCellValueFactory(new PropertyValueFactory<Profesor, Date>("departamento"));
 
-        cbxBuscarPor.getItems().setAll("Número de expediente", "DNI", "Nombre", "Apellidos", "Fecha de nacimiento");
+        cbxBuscarPor.getItems().setAll("DNI", "Nombre", "Apellidos", "Departamento");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
@@ -57,33 +55,21 @@ public class BuscarAlumnosController implements Initializable{
     private void buscar(ActionEvent ae){
         if (selectedItem != null) {
             switch(selectedItem) {
-              case "Número de expediente": findByID(); break;
               case "DNI": findByDNI(); break;
               case "Nombre": break;
               case "Apellidos": break;
-              case "Fecha de nacimiento": break;
+              case "Departamento": break;
             }
           }
     }
 
-    private void findByID(){
-        int id = Integer.parseInt(txtBusqueda.getText());
-        List<Alumno> als = new ArrayList<>();
-        try {
-            als.add(db.getAlumnoDAO().get(db.getConnection(), id));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        tabAlumnos.getItems().setAll(als);
-    }
-
     private void findByDNI(){
-        List<Alumno> als = new ArrayList<>();
+        List<Profesor> profs = new ArrayList<>();
         try {
-            als = db.getAlumnoDAO().getByDNI(db.getConnection(), txtBusqueda.getText());
+            profs = db.getProfesorDAO().getByDNI(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tabAlumnos.getItems().setAll(als);
+        tabProfesores.getItems().setAll(profs);
     }
 }
