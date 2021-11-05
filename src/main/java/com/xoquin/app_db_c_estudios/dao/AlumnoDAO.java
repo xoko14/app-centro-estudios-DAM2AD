@@ -52,4 +52,25 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
+    public List<Alumno> getByDNI(Connection conn, String query){
+        List<Alumno> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = conn.prepareStatement("select * from alumnos where dni = ?");
+            s.setString(1, query);
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                Alumno al = new Alumno();
+                al.setNumExp(rs.getInt("num_exp"));
+                al.setDni(rs.getString("dni"));
+                al.setNombre(rs.getString("nombre"));
+                al.setApellidos(rs.getString("apellidos"));
+                al.setFecha(rs.getDate("fecha_nac"));
+                lista.add(al);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 }
