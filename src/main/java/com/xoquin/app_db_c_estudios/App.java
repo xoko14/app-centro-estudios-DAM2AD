@@ -1,15 +1,14 @@
 package com.xoquin.app_db_c_estudios;
 
+import com.xoquin.app_db_c_estudios.controller.MainController;
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class App extends Application {
-
+public class App extends Application{
     public static void main(String[] args) {
         launch(args);
     }
@@ -18,7 +17,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/main_window.fxml"));
-        Controller c = new Controller();
+        MainController c = new MainController();
         loader.setController(c);
         Parent root = loader.load();
 
