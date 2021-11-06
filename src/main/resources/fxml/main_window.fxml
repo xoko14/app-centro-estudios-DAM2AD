@@ -53,7 +53,7 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="198.0" VBox.vgrow="ALWAYS">
          <children>
             <Button fx:id="btnBuscarAlumnos" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#abrirBuscarAlumnos" prefHeight="25.0" prefWidth="314.0" text="Buscar alumnos" />
-            <Button fx:id="btnBuscarProfesores" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#abrirBuscarProfesores" prefHeight="25.0" prefWidth="314.0" text="Buscar alumnos" />
+            <Button fx:id="btnBuscarProfesores" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#abrirBuscarProfesores" prefHeight="25.0" prefWidth="314.0" text="Buscar profesores" />
          </children>
     </AnchorPane>
   </children>
