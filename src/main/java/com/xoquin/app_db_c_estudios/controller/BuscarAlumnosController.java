@@ -59,7 +59,7 @@ public class BuscarAlumnosController implements Initializable{
             switch(selectedItem) {
               case "Número de expediente": findByID(); break;
               case "DNI": findByDNI(); break;
-              case "Nombre": break;
+              case "Nombre": findByName(); break;
               case "Apellidos": break;
               case "Fecha de nacimiento": break;
             }
@@ -81,6 +81,16 @@ public class BuscarAlumnosController implements Initializable{
         List<Alumno> als = new ArrayList<>();
         try {
             als = db.getAlumnoDAO().getByDNI(db.getConnection(), txtBusqueda.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tabAlumnos.getItems().setAll(als);
+    }
+
+    private void findByName(){
+        List<Alumno> als = new ArrayList<>();
+        try {
+            als = db.getAlumnoDAO().getByNombre(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }
