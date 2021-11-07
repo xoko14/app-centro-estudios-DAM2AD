@@ -24,4 +24,18 @@ INSERT INTO profesores (dni, nombre, apellidos, departamento) VALUES
 ("87654321V", "Samuel", "Ferreiro", 5),
 ("87654321U", "Mary", "Fernandez", 6),
 ("87654321T", "Marcelino", "Valencia", 7),
-("87654321S", "Isidora", "Carballo", 8);
+("87654321S", "Isidora", "Carballo", 8)
+("87654321R", "Juana", "Vargas", 8);
+
+INSERT INTO asignaturas (nombre) VALUES
+("Lengua Castellana"),
+("Lingua Galega"),
+("Matemáticas Académicas"),
+("Matemáticas Aplicadas"),
+("Filosofía"),
+("Valores Éticos"),
+("TIC"),
+("Inglés"),
+("Historia Contemporánea"),
+("Historia do Arte"),
+("Xeografía");

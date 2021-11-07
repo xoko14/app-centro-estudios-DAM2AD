@@ -56,4 +56,38 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    private void abrirBuscarDepartamentos(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscar_departamentos.fxml"));
+        BuscarDepartamentosController c = new BuscarDepartamentosController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void abrirBuscarAsignaturas(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscar_asignaturas.fxml"));
+        BuscarAsignaturasController c = new BuscarAsignaturasController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
