@@ -4,7 +4,7 @@ INSERT INTO alumnos(dni, nombre, apellidos, fecha_nac) VALUES
 ("12345678C", "Pedro", "Romero Fuentes", "2002-11-15"),
 ("12345678D", "Laura", "Ferreiro Outeiro", "1999-02-22"),
 ("12345678E", "Ariel", "López Suárez", "2001-05-14"),
-("12345678F", "Xoán", "Blanco Do Val", "2003-10-23")
+("12345678F", "Xoán", "Blanco Do Val", "2003-10-23");
 
 INSERT INTO departamentos (nombre) VALUES
 ("Matemáticas"),
@@ -24,7 +24,7 @@ INSERT INTO profesores (dni, nombre, apellidos, departamento) VALUES
 ("87654321V", "Samuel", "Ferreiro", 5),
 ("87654321U", "Mary", "Fernandez", 6),
 ("87654321T", "Marcelino", "Valencia", 7),
-("87654321S", "Isidora", "Carballo", 8)
+("87654321S", "Isidora", "Carballo", 8),
 ("87654321R", "Juana", "Vargas", 8);
 
 INSERT INTO asignaturas (nombre) VALUES
