@@ -39,3 +39,13 @@ INSERT INTO asignaturas (nombre) VALUES
 ("Historia Contemporánea"),
 ("Historia do Arte"),
 ("Xeografía");
+
+insert into imparten VALUES
+(1, 3, 1, 2021),
+(1, 3, 4, 2021),
+(2, 7, 1, 2021),
+(2, 7, 2, 2021),
+(2, 7, 3, 2021),
+(2, 7, 4, 2021),
+(2, 7, 5, 2021),
+(2, 7, 6, 2021);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.xoquin.app_db_c_estudios.factory.MariaDBDAOFactory;
+import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
 import com.xoquin.app_db_c_estudios.vo.Profesor;
 
 import javafx.beans.value.ChangeListener;
@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BuscarProfesoresController implements Initializable{
+public class BuscarProfesoresController extends DBViewController implements Initializable{
     @FXML private Button btnInitDB;
     @FXML private TableView<Profesor> tabProfesores;
     @FXML private TableColumn<Profesor, String> colDNI;
@@ -32,7 +32,6 @@ public class BuscarProfesoresController implements Initializable{
     @FXML private ComboBox<String> cbxBuscarPor; 
     @FXML private TextField txtBusqueda;
 
-    private MariaDBDAOFactory db = new MariaDBDAOFactory();
     private String selectedItem = null;
 
     @Override
@@ -56,9 +55,9 @@ public class BuscarProfesoresController implements Initializable{
         if (selectedItem != null) {
             switch(selectedItem) {
               case "DNI": findByDNI(); break;
-              case "Nombre": break;
-              case "Apellidos": break;
-              case "Departamento": break;
+              case "Nombre": findByRowLike(ProfesorDAO.ROW_NOMBRE); break;
+              case "Apellidos": findByRowLike(ProfesorDAO.ROW_APELLIDOS); break;
+              case "Departamento": findByRowLike(ProfesorDAO.ROW_DEPARTAMENTO); break;
             }
           }
     }
@@ -72,4 +71,14 @@ public class BuscarProfesoresController implements Initializable{
         }
         tabProfesores.getItems().setAll(profs);
     }
+
+    private void findByRowLike(String row){
+      List<Profesor> profs = new ArrayList<>();
+      try {
+          profs = db.getProfesorDAO().getByRowLike(db.getConnection(), row, txtBusqueda.getText());
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+      tabProfesores.getItems().setAll(profs);
+  }
 }

@@ -11,6 +11,8 @@ import java.util.List;
 import com.xoquin.app_db_c_estudios.vo.Alumno;
 
 public class AlumnoDAO implements Dao<Alumno> {
+    public static String ROW_NOMBRE = "nombre";
+    public static String ROW_APELLIDOS = "apellidos";
 
     @Override
     public Alumno get(Connection conn, int id) {
@@ -73,11 +75,53 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
-    public List<Alumno> getByNombre(Connection conn, String query){
+    public List<Alumno> getByRowLike(Connection conn, String row, String query){
         List<Alumno> lista = new ArrayList<>();
         try {
-            PreparedStatement s = conn.prepareStatement("select * from alumnos where upper(nombre) like upper(?)");
+            PreparedStatement s = conn.prepareStatement("select * from alumnos where upper("+row+") like upper(?)");
             s.setString(1, "%"+query+"%");
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                Alumno al = new Alumno();
+                al.setNumExp(rs.getInt("num_exp"));
+                al.setDni(rs.getString("dni"));
+                al.setNombre(rs.getString("nombre"));
+                al.setApellidos(rs.getString("apellidos"));
+                al.setFecha(rs.getDate("fecha_nac"));
+                lista.add(al);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Alumno> getByYear(Connection conn, String query){
+        List<Alumno> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = conn.prepareStatement("select * from alumnos where fecha_nac regexp ?");
+            s.setString(1, query+"-[0-9][0-9]-[0-9][0-9]");
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                Alumno al = new Alumno();
+                al.setNumExp(rs.getInt("num_exp"));
+                al.setDni(rs.getString("dni"));
+                al.setNombre(rs.getString("nombre"));
+                al.setApellidos(rs.getString("apellidos"));
+                al.setFecha(rs.getDate("fecha_nac"));
+                lista.add(al);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Alumno> getByProfesor(Connection conn, String query){
+        List<Alumno> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = conn.prepareStatement("select * from alumnos a inner join imparten i on a.num_exp = i.alumno inner join profesores p on i.profesor = p.id where p.dni = ? group by a.num_exp");
+            s.setString(1, query);
             ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 Alumno al = new Alumno();

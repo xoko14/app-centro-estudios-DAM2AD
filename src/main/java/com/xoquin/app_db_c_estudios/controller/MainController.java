@@ -33,6 +33,7 @@ public class MainController implements Initializable {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,6 +51,7 @@ public class MainController implements Initializable {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,6 +69,7 @@ public class MainController implements Initializable {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,6 +87,7 @@ public class MainController implements Initializable {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

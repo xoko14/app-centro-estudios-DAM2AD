@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.xoquin.app_db_c_estudios.factory.MariaDBDAOFactory;
+import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;
 import com.xoquin.app_db_c_estudios.vo.Alumno;
 
 import javafx.beans.value.ChangeListener;
@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BuscarAlumnosController implements Initializable{
+public class BuscarAlumnosController extends DBViewController implements Initializable{
     @FXML private Button btnInitDB;
     @FXML private TableView<Alumno> tabAlumnos;
     @FXML private TableColumn<Alumno, Integer> colNum;
@@ -33,7 +33,6 @@ public class BuscarAlumnosController implements Initializable{
     @FXML private ComboBox<String> cbxBuscarPor; 
     @FXML private TextField txtBusqueda;
 
-    private MariaDBDAOFactory db = new MariaDBDAOFactory();
     private String selectedItem = null;
 
     @Override
@@ -44,7 +43,7 @@ public class BuscarAlumnosController implements Initializable{
         colApellidos.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellidos"));
         colNac.setCellValueFactory(new PropertyValueFactory<Alumno, Date>("fecha"));
 
-        cbxBuscarPor.getItems().setAll("Número de expediente", "DNI", "Nombre", "Apellidos", "Fecha de nacimiento");
+        cbxBuscarPor.getItems().setAll("Número de expediente", "DNI", "Nombre", "Apellidos", "Año de nacimiento", "DNI de profesor");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
@@ -59,9 +58,10 @@ public class BuscarAlumnosController implements Initializable{
             switch(selectedItem) {
               case "Número de expediente": findByID(); break;
               case "DNI": findByDNI(); break;
-              case "Nombre": findByName(); break;
-              case "Apellidos": break;
-              case "Fecha de nacimiento": break;
+              case "Nombre": findByRowLike(AlumnoDAO.ROW_NOMBRE); break;
+              case "Apellidos": findByRowLike(AlumnoDAO.ROW_APELLIDOS); break;
+              case "Año de nacimiento": findByAnho(); break;
+              case "DNI de profesor": findByProfesor(); break;
             }
           }
     }
@@ -87,10 +87,30 @@ public class BuscarAlumnosController implements Initializable{
         tabAlumnos.getItems().setAll(als);
     }
 
-    private void findByName(){
+    private void findByRowLike(String row){
         List<Alumno> als = new ArrayList<>();
         try {
-            als = db.getAlumnoDAO().getByNombre(db.getConnection(), txtBusqueda.getText());
+            als = db.getAlumnoDAO().getByRowLike(db.getConnection(), row, txtBusqueda.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tabAlumnos.getItems().setAll(als);
+    }
+
+    private void findByAnho(){
+        List<Alumno> als = new ArrayList<>();
+        try {
+            als = db.getAlumnoDAO().getByYear(db.getConnection(), txtBusqueda.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tabAlumnos.getItems().setAll(als);
+    }
+
+    private void findByProfesor(){
+        List<Alumno> als = new ArrayList<>();
+        try {
+            als = db.getAlumnoDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -68,4 +68,23 @@ public class DepartamentoDAO implements Dao<Departamento> {
         return lista;
     }
 
+    public List<Departamento> getByProfesor(Connection conn, String query){
+        List<Departamento> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = conn.prepareStatement("select * from departamentosObject d inner join profesores p on d.id = p.departamento where p.dni =  ? group by d.id");
+            s.setString(1, query);
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                Departamento dept = new Departamento();
+                dept.setId(rs.getInt("id"));
+                dept.setNombre(rs.getString("nombre"));
+                dept.setNumProf(rs.getInt("num_prof"));
+                lista.add(dept);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 }

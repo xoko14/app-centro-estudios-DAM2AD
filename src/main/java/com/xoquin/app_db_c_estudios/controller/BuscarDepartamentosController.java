@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.xoquin.app_db_c_estudios.factory.MariaDBDAOFactory;
 import com.xoquin.app_db_c_estudios.vo.Departamento;
 
 import javafx.beans.value.ChangeListener;
@@ -21,7 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BuscarDepartamentosController implements Initializable{
+public class BuscarDepartamentosController extends DBViewController implements Initializable{
     @FXML private Button btnInitDB;
     @FXML private TableView<Departamento> tabDepartamentos;
     @FXML private TableColumn<Departamento, String> colNombre;
@@ -29,7 +28,6 @@ public class BuscarDepartamentosController implements Initializable{
     @FXML private ComboBox<String> cbxBuscarPor; 
     @FXML private TextField txtBusqueda;
 
-    private MariaDBDAOFactory db = new MariaDBDAOFactory();
     private String selectedItem = null;
 
     @Override
@@ -37,7 +35,7 @@ public class BuscarDepartamentosController implements Initializable{
         colNombre.setCellValueFactory(new PropertyValueFactory<Departamento, String>("nombre"));
         colNumProf.setCellValueFactory(new PropertyValueFactory<Departamento, String>("numProf"));
 
-        cbxBuscarPor.getItems().setAll("Nombre", "Número de profesores", "DNI de profesor");
+        cbxBuscarPor.getItems().setAll("Nombre", "DNI de profesor");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
@@ -51,8 +49,7 @@ public class BuscarDepartamentosController implements Initializable{
         if (selectedItem != null) {
             switch(selectedItem) {
               case "Nombre": findByName(); break;
-              case "Número de profesores": break;
-              case "DNI de profesor": break;
+              case "DNI de profesor": findByProfesor(); break;
             }
           }
     }
@@ -61,6 +58,16 @@ public class BuscarDepartamentosController implements Initializable{
         List<Departamento> depts = new ArrayList<>();
         try {
             depts = db.gDepartamentoDAO().getByName(db.getConnection(), txtBusqueda.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tabDepartamentos.getItems().setAll(depts);
+    }
+
+    private void findByProfesor(){
+      List<Departamento> depts = new ArrayList<>();
+        try {
+            depts = db.gDepartamentoDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }

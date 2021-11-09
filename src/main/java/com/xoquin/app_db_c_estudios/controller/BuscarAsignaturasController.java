@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.xoquin.app_db_c_estudios.factory.MariaDBDAOFactory;
 import com.xoquin.app_db_c_estudios.vo.Asignatura;
 
 import javafx.beans.value.ChangeListener;
@@ -21,14 +20,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BuscarAsignaturasController implements Initializable{
+public class BuscarAsignaturasController extends DBViewController implements Initializable{
     @FXML private Button btnInitDB;
     @FXML private TableView<Asignatura> tabAsignaturas;
     @FXML private TableColumn<Asignatura, String> colNombre;
     @FXML private ComboBox<String> cbxBuscarPor; 
     @FXML private TextField txtBusqueda;
 
-    private MariaDBDAOFactory db = new MariaDBDAOFactory();
     private String selectedItem = null;
 
     @Override
