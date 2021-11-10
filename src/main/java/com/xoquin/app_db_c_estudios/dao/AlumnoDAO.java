@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.xoquin.app_db_c_estudios.vo.Alumno;
 
+import org.json.JSONObject;
+
 public class AlumnoDAO implements Dao<Alumno> {
     public static String ROW_NOMBRE = "nombre";
     public static String ROW_APELLIDOS = "apellidos";
@@ -150,6 +152,13 @@ public class AlumnoDAO implements Dao<Alumno> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public JSONObject toJSON(Connection conn) {
+        JSONObject obj;
+        List<Alumno> list = this.getAll(conn);
+        return null;
     }
 
 }

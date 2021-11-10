@@ -1,5 +1,6 @@
 package com.xoquin.app_db_c_estudios.factory;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -62,5 +63,29 @@ public class MariaDBDAOFactory extends DAOFactory{
     @Override
     public ProfesorDAO getProfesorDAO() {
         return new ProfesorDAO();
+    }
+
+    @Override
+    public boolean createDB() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean clearDB() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean volcarDB(URL location) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean cargarVolcadoDB(URL location) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

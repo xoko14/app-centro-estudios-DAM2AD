@@ -1,5 +1,6 @@
 package com.xoquin.app_db_c_estudios.factory;
 
+import java.net.URL;
 import java.sql.Connection;
 
 import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;
@@ -22,6 +23,12 @@ public abstract class DAOFactory {
     public abstract AsignaturaDAO getAsignaturaDAO();
     public abstract DepartamentoDAO gDepartamentoDAO();
     public abstract ProfesorDAO getProfesorDAO();
+    
+    public abstract boolean createDB();
+    public abstract boolean clearDB();
+    public abstract boolean volcarDB(URL location);
+    public abstract boolean cargarVolcadoDB(URL location);
+
 
 
     /*
