@@ -138,4 +138,18 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
+    public boolean newAlumno(Connection conn, String dni, String nombre, String apellidos, String fecha){
+        try {
+            PreparedStatement s = conn.prepareStatement("insert into alumnos (dni, nombre, apellidos, fecha_nac) values (?, ?, ?, ?)");
+            s.setString(1, dni);
+            s.setString(2, nombre);
+            s.setString(3, apellidos);
+            s.setString(4, fecha);
+            s.execute();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+
 }

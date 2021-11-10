@@ -20,46 +20,71 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BuscarAsignaturasController extends DBViewController implements Initializable{
-    @FXML private Button btnInitDB;
-    @FXML private TableView<Asignatura> tabAsignaturas;
-    @FXML private TableColumn<Asignatura, String> colNombre;
-    @FXML private ComboBox<String> cbxBuscarPor; 
-    @FXML private TextField txtBusqueda;
+public class BuscarAsignaturasController extends DBViewController implements Initializable {
+  @FXML
+  private Button btnInitDB;
+  @FXML
+  private TableView<Asignatura> tabAsignaturas;
+  @FXML
+  private TableColumn<Asignatura, String> colNombre;
+  @FXML
+  private ComboBox<String> cbxBuscarPor;
+  @FXML
+  private TextField txtBusqueda;
 
-    private String selectedItem = null;
+  private String selectedItem = null;
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        colNombre.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("nombre"));
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
+    colNombre.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("nombre"));
 
-        cbxBuscarPor.getItems().setAll("Nombre", "DNI de profesor", "Número de expediente de alumno");
-        cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
-              selectedItem = newI;
-            }
-          });
+    cbxBuscarPor.getItems().setAll("Nombre", "DNI de profesor", "Número de expediente de alumno");
+    cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+      @Override
+      public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
+        selectedItem = newI;
+      }
+    });
+  }
+
+  @FXML
+  private void buscar(ActionEvent ae) {
+    if (selectedItem != null) {
+      switch (selectedItem) {
+      case "Nombre": findByName(); break;
+      case "DNI de profesor": findByProfesor(); break;
+      case "Número de expediente de alumno": findByAlumno(); break;
+      }
     }
+  }
 
-    @FXML
-    private void buscar(ActionEvent ae){
-        if (selectedItem != null) {
-            switch(selectedItem) {
-              case "Nombre": findByName(); break;
-              case "Número de profesores": break;
-              case "DNI de profesor": break;
-            }
-          }
+  private void findByName() {
+    List<Asignatura> depts = new ArrayList<>();
+    try {
+      depts = db.getAsignaturaDAO().getByName(db.getConnection(), txtBusqueda.getText());
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+    tabAsignaturas.getItems().setAll(depts);
+  }
 
-    private void findByName(){
-        List<Asignatura> depts = new ArrayList<>();
-        try {
-            depts = db.getAsignaturaDAO().getByName(db.getConnection(), txtBusqueda.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        tabAsignaturas.getItems().setAll(depts);
+  private void findByProfesor() {
+    List<Asignatura> depts = new ArrayList<>();
+    try {
+      depts = db.getAsignaturaDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+    tabAsignaturas.getItems().setAll(depts);
+  }
+
+  private void findByAlumno() {
+    List<Asignatura> depts = new ArrayList<>();
+    try {
+      depts = db.getAsignaturaDAO().getByAlumno(db.getConnection(), txtBusqueda.getText());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    tabAsignaturas.getItems().setAll(depts);
+  }
 }

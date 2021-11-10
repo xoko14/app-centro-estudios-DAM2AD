@@ -94,4 +94,22 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    private void abrirCrearAlumnos(ActionEvent ae){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/crear_alumnos.fxml"));
+        CrearAlumnosController c = new CrearAlumnosController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
