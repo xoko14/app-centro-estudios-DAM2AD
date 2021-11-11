@@ -171,4 +171,14 @@ public class AlumnoDAO implements Dao<Alumno> {
         return new JSONObject().put("alumnos", jsonArr);
     }
 
+    @Override
+    public void batchInsert(Connection conn, List<Alumno> list) {
+        
+    }
+
+    @Override
+    public List<Alumno> getJSON(JSONArray arr) {
+        return null;
+    }
+
 }

@@ -25,4 +25,13 @@ public class JSONTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void volcar(){
+        try {
+            db.volcarDB(db.getConnection(), "/home/xoquin/Documentos/Projects/app_db_c_estudios/target/volcado");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

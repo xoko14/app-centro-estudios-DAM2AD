@@ -1,6 +1,6 @@
 package com.xoquin.app_db_c_estudios.factory;
 
-import java.net.URL;
+import java.nio.file.Path;
 import java.sql.Connection;
 
 import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;
@@ -26,8 +26,8 @@ public abstract class DAOFactory {
     
     public abstract boolean createDB();
     public abstract boolean clearDB();
-    public abstract boolean volcarDB(URL location);
-    public abstract boolean cargarVolcadoDB(URL location);
+    public abstract boolean volcarDB(Connection conn, String location);
+    public abstract boolean cargarVolcadoDB(Connection conn, String location);
 
 
 

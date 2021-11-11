@@ -1,6 +1,12 @@
 package com.xoquin.app_db_c_estudios.factory;
 
-import java.net.URL;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -9,6 +15,8 @@ import com.xoquin.app_db_c_estudios.dao.AsignaturaDAO;
 import com.xoquin.app_db_c_estudios.dao.DepartamentoDAO;
 import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
 import com.xoquin.app_db_c_estudios.pool.BasicConnectionPool;
+
+import org.json.JSONObject;
 
 public class MariaDBDAOFactory extends DAOFactory{
     final static String url = "jdbc:mariadb://localhost/centro_estudios";
@@ -78,14 +86,44 @@ public class MariaDBDAOFactory extends DAOFactory{
     }
 
     @Override
-    public boolean volcarDB(URL location) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean volcarDB(Connection conn, String location) {
+        Writer writer;
+        try {
+            writer = new FileWriter(Paths.get(location, "alumnos.json").toFile());
+            this.getAlumnoDAO().toJSON(conn).write(writer);
+            writer.flush();
+            writer.close();
+            
+            writer = new FileWriter(Paths.get(location.toString(), "departamentos.json").toFile());
+            this.getDepartamentoDAO().toJSON(conn).write(writer);
+            writer.flush();
+            writer.close();
+
+            writer = new FileWriter(Paths.get(location.toString(), "profesores.json").toFile());
+            this.getProfesorDAO().toJSON(conn).write(writer);
+            writer.flush();
+            writer.close();
+
+            writer = new FileWriter(Paths.get(location.toString(), "asignaturas.json").toFile());
+            this.getAsignaturaDAO().toJSON(conn).write(writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override
-    public boolean cargarVolcadoDB(URL location) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean cargarVolcadoDB(Connection conn, String location) {
+        String content;
+        try {
+            content = Files.readString(Paths.get(location, "alumnos.json"), StandardCharsets.UTF_8);
+            JSONObject als = new JSONObject(content).getJSONObject("alumnos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

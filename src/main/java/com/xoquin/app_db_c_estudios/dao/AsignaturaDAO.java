@@ -37,7 +37,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
         List<Asignatura> lista = new ArrayList<>();
         try {
             Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("select * from asiganturas");
+            ResultSet rs = s.executeQuery("select * from asignaturas");
             while (rs.next()) {
                 Asignatura asig = new Asignatura();
                 asig.setId(rs.getInt("id"));
