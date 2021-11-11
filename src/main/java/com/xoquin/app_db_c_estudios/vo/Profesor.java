@@ -6,6 +6,15 @@ public class Profesor {
     private String nombre;
     private String apellidos;
     private String departamento;
+    private int departamentoId;
+
+    public int getDepartamentoId() {
+        return this.departamentoId;
+    }
+
+    public void setDepartamentoId(int departamentoId) {
+        this.departamentoId = departamentoId;
+    }
 
     public int getId() {
         return this.id;

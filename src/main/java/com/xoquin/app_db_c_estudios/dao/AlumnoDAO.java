@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.xoquin.app_db_c_estudios.vo.Alumno;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class AlumnoDAO implements Dao<Alumno> {
@@ -156,9 +157,18 @@ public class AlumnoDAO implements Dao<Alumno> {
 
     @Override
     public JSONObject toJSON(Connection conn) {
-        JSONObject obj;
+        JSONArray jsonArr = new JSONArray();
         List<Alumno> list = this.getAll(conn);
-        return null;
+        list.forEach(item -> {
+            JSONObject obj = new JSONObject();
+            obj.put("num_exp", item.getNumExp());
+            obj.put("dni", item.getDni());
+            obj.put("nombre", item.getNombre());
+            obj.put("apellidos", item.getApellidos());
+            obj.put("fecha_nac", item.getFecha().toString());
+            jsonArr.put(obj);
+        });
+        return new JSONObject().put("alumnos", jsonArr);
     }
 
 }

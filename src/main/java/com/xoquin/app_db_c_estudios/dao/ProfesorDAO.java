@@ -10,6 +10,9 @@ import java.util.List;
 
 import com.xoquin.app_db_c_estudios.vo.Profesor;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class ProfesorDAO implements Dao<Profesor> {
     public static String ROW_NOMBRE = "nombre";
     public static String ROW_APELLIDOS = "apellidos";
@@ -90,12 +93,29 @@ public class ProfesorDAO implements Dao<Profesor> {
                 pro.setNombre(rs.getString("nombre"));
                 pro.setApellidos(rs.getString("apellidos"));
                 pro.setDepartamento(rs.getString("departamento"));
+                pro.setDepartamentoId(rs.getInt("id_departamento"));
                 lista.add(pro);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    @Override
+    public JSONObject toJSON(Connection conn) {
+        JSONArray jsonArr = new JSONArray();
+        List<Profesor> list = this.getAll(conn);
+        list.forEach(item -> {
+            JSONObject obj = new JSONObject();
+            obj.put("id", item.getId());
+            obj.put("dni", item.getDni());
+            obj.put("nombre", item.getNombre());
+            obj.put("apellidos", item.getApellidos());
+            obj.put("departamento", item.getDepartamentoId());
+            jsonArr.put(obj);
+        });
+        return new JSONObject().put("profesores", jsonArr);
     }
 
 }

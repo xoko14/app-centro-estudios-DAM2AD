@@ -10,6 +10,9 @@ import java.util.List;
 
 import com.xoquin.app_db_c_estudios.vo.Asignatura;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class AsignaturaDAO implements Dao<Asignatura> {
 
     @Override
@@ -99,5 +102,18 @@ public class AsignaturaDAO implements Dao<Asignatura> {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    @Override
+    public JSONObject toJSON(Connection conn) {
+        JSONArray jsonArr = new JSONArray();
+        List<Asignatura> list = this.getAll(conn);
+        list.forEach(item -> {
+            JSONObject obj = new JSONObject();
+            obj.put("id", item.getId());
+            obj.put("nombre", item.getNombre());
+            jsonArr.put(obj);
+        });
+        return new JSONObject().put("asignaturas", jsonArr);
     }
 }

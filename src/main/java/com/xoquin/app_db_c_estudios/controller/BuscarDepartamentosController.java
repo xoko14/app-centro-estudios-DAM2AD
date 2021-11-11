@@ -57,7 +57,7 @@ public class BuscarDepartamentosController extends DBViewController implements I
     private void findByName(){
         List<Departamento> depts = new ArrayList<>();
         try {
-            depts = db.gDepartamentoDAO().getByName(db.getConnection(), txtBusqueda.getText());
+            depts = db.getDepartamentoDAO().getByName(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,7 +67,7 @@ public class BuscarDepartamentosController extends DBViewController implements I
     private void findByProfesor(){
       List<Departamento> depts = new ArrayList<>();
         try {
-            depts = db.gDepartamentoDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
+            depts = db.getDepartamentoDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }

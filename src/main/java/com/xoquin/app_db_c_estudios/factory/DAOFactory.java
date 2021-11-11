@@ -21,7 +21,7 @@ public abstract class DAOFactory {
     // implement these methods.
     public abstract AlumnoDAO getAlumnoDAO();
     public abstract AsignaturaDAO getAsignaturaDAO();
-    public abstract DepartamentoDAO gDepartamentoDAO();
+    public abstract DepartamentoDAO getDepartamentoDAO();
     public abstract ProfesorDAO getProfesorDAO();
     
     public abstract boolean createDB();

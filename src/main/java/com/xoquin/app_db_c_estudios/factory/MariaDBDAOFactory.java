@@ -56,7 +56,7 @@ public class MariaDBDAOFactory extends DAOFactory{
     }
 
     @Override
-    public DepartamentoDAO gDepartamentoDAO() {
+    public DepartamentoDAO getDepartamentoDAO() {
         return new DepartamentoDAO();
     }
 
