@@ -178,7 +178,12 @@ public class AlumnoDAO implements Dao<Alumno> {
 
     @Override
     public List<Alumno> getJSON(JSONArray arr) {
-        return null;
+        List<Alumno> list = new ArrayList<>();
+        arr.forEach(o -> {
+            Alumno item = new Alumno();
+            item.setNumExp(((JSONObject) o).getInt("num_exp"));
+        });
+        return list;
     }
 
 }
