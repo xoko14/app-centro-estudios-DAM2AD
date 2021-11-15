@@ -29,9 +29,23 @@ public class JSONTest {
     @Test
     public void volcar(){
         try {
-            db.volcarDB(db.getConnection(), "/home/xoquin/Documentos/Projects/app_db_c_estudios/target/volcado");
+            db.volcarDB(db.getConnection(), "B:\\Documentos\\GitHub\\DAM2\\app-centro-estudios-DAM2AD\\target\\volcado");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void cargarVolcado(){
+        try {
+            db.cargarVolcadoDB(db.getConnection(), "B:\\Documentos\\GitHub\\DAM2\\app-centro-estudios-DAM2AD\\target\\volcado");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void clearDB(){
+        db.clearDB();
     }
 }

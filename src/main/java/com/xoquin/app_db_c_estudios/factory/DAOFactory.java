@@ -1,6 +1,5 @@
 package com.xoquin.app_db_c_estudios.factory;
 
-import java.nio.file.Path;
 import java.sql.Connection;
 
 import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;

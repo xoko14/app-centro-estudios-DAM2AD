@@ -31,7 +31,7 @@ public class ProfesorDAO implements Dao<Profesor> {
             pro.setNombre(rs.getString("nombre"));
             pro.setApellidos(rs.getString("apellidos"));
             pro.setDepartamento(rs.getString("departamento"));
-
+            pro.setDepartamentoId(rs.getInt("id_departamento"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,6 +51,7 @@ public class ProfesorDAO implements Dao<Profesor> {
                 pro.setNombre(rs.getString("nombre"));
                 pro.setApellidos(rs.getString("apellidos"));
                 pro.setDepartamento(rs.getString("departamento"));
+                pro.setDepartamentoId(rs.getInt("id_departamento"));
                 lista.add(pro);
             }
         } catch (SQLException e) {
@@ -72,6 +73,7 @@ public class ProfesorDAO implements Dao<Profesor> {
                 pro.setNombre(rs.getString("nombre"));
                 pro.setApellidos(rs.getString("apellidos"));
                 pro.setDepartamento(rs.getString("departamento"));
+                pro.setDepartamentoId(rs.getInt("id_departamento"));
                 lista.add(pro);
             }
         } catch (SQLException e) {
@@ -116,6 +118,39 @@ public class ProfesorDAO implements Dao<Profesor> {
             jsonArr.put(obj);
         });
         return new JSONObject().put("profesores", jsonArr);
+    }
+
+    @Override
+    public void batchInsert(Connection conn, List<Profesor> list) {
+        try {
+            PreparedStatement s = conn.prepareStatement("insert into profesores values (?, ?, ?, ?, ?)");
+            for (Profesor item : list) {
+                s.setInt(1, item.getId());
+                s.setString(2, item.getDni());
+                s.setString(3, item.getNombre());
+                s.setString(4, item.getApellidos());
+                s.setInt(5, item.getDepartamentoId());
+                s.addBatch();
+            }
+            s.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Profesor> getJSON(JSONArray arr) {
+        List<Profesor> list = new ArrayList<>();
+        arr.forEach(o -> {
+            Profesor item = new Profesor();
+            item.setId(((JSONObject) o).getInt("id"));
+            item.setDni(((JSONObject) o).getString("dni"));
+            item.setNombre(((JSONObject) o).getString("nombre"));
+            item.setApellidos(((JSONObject) o).getString("apellidos"));
+            item.setDepartamentoId(((JSONObject) o).getInt("departamento"));
+            list.add(item);
+        });
+        return list;
     }
 
 }

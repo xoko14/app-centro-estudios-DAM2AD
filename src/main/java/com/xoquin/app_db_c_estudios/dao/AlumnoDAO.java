@@ -1,6 +1,7 @@
 package com.xoquin.app_db_c_estudios.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,7 +58,7 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
-    public List<Alumno> getByDNI(Connection conn, String query){
+    public List<Alumno> getByDNI(Connection conn, String query) {
         List<Alumno> lista = new ArrayList<>();
         try {
             PreparedStatement s = conn.prepareStatement("select * from alumnos where dni = ?");
@@ -78,11 +79,11 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
-    public List<Alumno> getByRowLike(Connection conn, String row, String query){
+    public List<Alumno> getByRowLike(Connection conn, String row, String query) {
         List<Alumno> lista = new ArrayList<>();
         try {
-            PreparedStatement s = conn.prepareStatement("select * from alumnos where upper("+row+") like upper(?)");
-            s.setString(1, "%"+query+"%");
+            PreparedStatement s = conn.prepareStatement("select * from alumnos where upper(" + row + ") like upper(?)");
+            s.setString(1, "%" + query + "%");
             ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 Alumno al = new Alumno();
@@ -99,11 +100,11 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
-    public List<Alumno> getByYear(Connection conn, String query){
+    public List<Alumno> getByYear(Connection conn, String query) {
         List<Alumno> lista = new ArrayList<>();
         try {
             PreparedStatement s = conn.prepareStatement("select * from alumnos where fecha_nac regexp ?");
-            s.setString(1, query+"-[0-9][0-9]-[0-9][0-9]");
+            s.setString(1, query + "-[0-9][0-9]-[0-9][0-9]");
             ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 Alumno al = new Alumno();
@@ -120,10 +121,11 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
-    public List<Alumno> getByProfesor(Connection conn, String query){
+    public List<Alumno> getByProfesor(Connection conn, String query) {
         List<Alumno> lista = new ArrayList<>();
         try {
-            PreparedStatement s = conn.prepareStatement("select * from alumnos a inner join imparten i on a.num_exp = i.alumno inner join profesores p on i.profesor = p.id where p.dni = ? group by a.num_exp");
+            PreparedStatement s = conn.prepareStatement(
+                    "select * from alumnos a inner join imparten i on a.num_exp = i.alumno inner join profesores p on i.profesor = p.id where p.dni = ? group by a.num_exp");
             s.setString(1, query);
             ResultSet rs = s.executeQuery();
             while (rs.next()) {
@@ -141,9 +143,10 @@ public class AlumnoDAO implements Dao<Alumno> {
         return lista;
     }
 
-    public boolean newAlumno(Connection conn, String dni, String nombre, String apellidos, String fecha){
+    public boolean newAlumno(Connection conn, String dni, String nombre, String apellidos, String fecha) {
         try {
-            PreparedStatement s = conn.prepareStatement("insert into alumnos (dni, nombre, apellidos, fecha_nac) values (?, ?, ?, ?)");
+            PreparedStatement s = conn
+                    .prepareStatement("insert into alumnos (dni, nombre, apellidos, fecha_nac) values (?, ?, ?, ?)");
             s.setString(1, dni);
             s.setString(2, nombre);
             s.setString(3, apellidos);
@@ -173,7 +176,20 @@ public class AlumnoDAO implements Dao<Alumno> {
 
     @Override
     public void batchInsert(Connection conn, List<Alumno> list) {
-        
+        try {
+            PreparedStatement s = conn.prepareStatement("insert into alumnos values (?, ?, ?, ?, ?)");
+            for (Alumno item : list) {
+                s.setInt(1, item.getNumExp());
+                s.setString(2, item.getDni());
+                s.setString(3, item.getNombre());
+                s.setString(4, item.getApellidos());
+                s.setDate(5, item.getFecha());
+                s.addBatch();
+            }
+            s.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -182,6 +198,11 @@ public class AlumnoDAO implements Dao<Alumno> {
         arr.forEach(o -> {
             Alumno item = new Alumno();
             item.setNumExp(((JSONObject) o).getInt("num_exp"));
+            item.setDni(((JSONObject) o).getString("dni"));
+            item.setNombre(((JSONObject) o).getString("nombre"));
+            item.setApellidos(((JSONObject) o).getString("apellidos"));
+            item.setFecha(Date.valueOf(((JSONObject) o).getString("fecha_nac")));
+            list.add(item);
         });
         return list;
     }

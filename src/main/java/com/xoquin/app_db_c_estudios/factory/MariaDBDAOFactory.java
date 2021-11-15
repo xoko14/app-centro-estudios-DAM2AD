@@ -1,11 +1,13 @@
 package com.xoquin.app_db_c_estudios.factory;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,6 +18,8 @@ import com.xoquin.app_db_c_estudios.dao.DepartamentoDAO;
 import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
 import com.xoquin.app_db_c_estudios.pool.BasicConnectionPool;
 
+import org.apache.ibatis.jdbc.ScriptRunner;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MariaDBDAOFactory extends DAOFactory{
@@ -75,14 +79,28 @@ public class MariaDBDAOFactory extends DAOFactory{
 
     @Override
     public boolean createDB() {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            ScriptRunner sr = new ScriptRunner(getConnection());
+            Reader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/sql/init_db.sql")));
+            sr.runScript(reader);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean clearDB() {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            ScriptRunner sr = new ScriptRunner(getConnection());
+            Reader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/sql/clear_db.sql")));
+            sr.runScript(reader);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -119,10 +137,25 @@ public class MariaDBDAOFactory extends DAOFactory{
         String content;
         try {
             content = Files.readString(Paths.get(location, "alumnos.json"), StandardCharsets.UTF_8);
-            JSONObject als = new JSONObject(content).getJSONObject("alumnos");
+            JSONArray als = new JSONObject(content).getJSONArray("alumnos");
+            getAlumnoDAO().batchInsert(getConnection(), getAlumnoDAO().getJSON(als));
+
+            content = Files.readString(Paths.get(location, "asignaturas.json"), StandardCharsets.UTF_8);
+            JSONArray asig = new JSONObject(content).getJSONArray("asignaturas");
+            getAsignaturaDAO().batchInsert(getConnection(), getAsignaturaDAO().getJSON(asig));
+
+            content = Files.readString(Paths.get(location, "departamentos.json"), StandardCharsets.UTF_8);
+            JSONArray depts = new JSONObject(content).getJSONArray("departamentos");
+            getDepartamentoDAO().batchInsert(getConnection(), getDepartamentoDAO().getJSON(depts));
+
+            content = Files.readString(Paths.get(location, "profesores.json"), StandardCharsets.UTF_8);
+            JSONArray profs = new JSONObject(content).getJSONArray("profesores");
+            getProfesorDAO().batchInsert(getConnection(), getProfesorDAO().getJSON(profs));
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return true;
     }

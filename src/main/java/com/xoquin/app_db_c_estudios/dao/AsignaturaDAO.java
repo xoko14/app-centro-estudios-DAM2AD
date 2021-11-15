@@ -116,4 +116,31 @@ public class AsignaturaDAO implements Dao<Asignatura> {
         });
         return new JSONObject().put("asignaturas", jsonArr);
     }
+
+    @Override
+    public void batchInsert(Connection conn, List<Asignatura> list) {
+        try {
+            PreparedStatement s = conn.prepareStatement("insert into asignaturas values (?, ?)");
+            for (Asignatura item : list) {
+                s.setInt(1, item.getId());
+                s.setString(2, item.getNombre());
+                s.addBatch();
+            }
+            s.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Asignatura> getJSON(JSONArray arr) {
+        List<Asignatura> list = new ArrayList<>();
+        arr.forEach(o -> {
+            Asignatura item = new Asignatura();
+            item.setId(((JSONObject) o).getInt("id"));
+            item.setNombre(((JSONObject) o).getString("nombre"));
+            list.add(item);
+        });
+        return list;
+    }
 }

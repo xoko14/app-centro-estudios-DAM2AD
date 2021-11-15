@@ -103,4 +103,31 @@ public class DepartamentoDAO implements Dao<Departamento> {
         return new JSONObject().put("departamentos", jsonArr);
     }
 
+    @Override
+    public void batchInsert(Connection conn, List<Departamento> list) {
+        try {
+            PreparedStatement s = conn.prepareStatement("insert into departamentos values (?, ?)");
+            for (Departamento item : list) {
+                s.setInt(1, item.getId());
+                s.setString(2, item.getNombre());
+                s.addBatch();
+            }
+            s.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Departamento> getJSON(JSONArray arr) {
+        List<Departamento> list = new ArrayList<>();
+        arr.forEach(o -> {
+            Departamento item = new Departamento();
+            item.setId(((JSONObject) o).getInt("id"));
+            item.setNombre(((JSONObject) o).getString("nombre"));
+            list.add(item);
+        });
+        return list;
+    }
+
 }
