@@ -13,8 +13,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>16</maven.compiler.source>
+    <maven.compiler.target>16</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -120,6 +120,14 @@
           <configuration>
               <mainClass>com.xoquin.app_dc_c_estudios.App</mainClass>
           </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.zenjava</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>8.8.3</version>
+        <configuration>
+          <mainClass>com.xoquin.app_dc_c_estudios.App</mainClass>
+        </configuration>
       </plugin>
       </plugins>
     </pluginManagement>
