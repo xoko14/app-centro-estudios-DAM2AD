@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;
 import com.xoquin.app_db_c_estudios.dao.AsignaturaDAO;
 import com.xoquin.app_db_c_estudios.dao.DepartamentoDAO;
+import com.xoquin.app_db_c_estudios.dao.ImpartenDAO;
 import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
 import com.xoquin.app_db_c_estudios.pool.BasicConnectionPool;
 
@@ -27,6 +28,8 @@ public class MariaDBDAOFactory extends DAOFactory{
     final static String user = "admin";
     final static String password = "1234";
     static BasicConnectionPool bcp;
+
+    private ImpartenDAO impartenDAO = new ImpartenDAO();
 
     public MariaDBDAOFactory() {
         try {
@@ -126,6 +129,11 @@ public class MariaDBDAOFactory extends DAOFactory{
             this.getAsignaturaDAO().toJSON(conn).write(writer);
             writer.flush();
             writer.close();
+
+            writer = new FileWriter(Paths.get(location.toString(), "imparten.json").toFile());
+            impartenDAO.toJSON(conn).write(writer);
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -151,6 +159,10 @@ public class MariaDBDAOFactory extends DAOFactory{
             content = Files.readString(Paths.get(location, "profesores.json"), StandardCharsets.UTF_8);
             JSONArray profs = new JSONObject(content).getJSONArray("profesores");
             getProfesorDAO().batchInsert(getConnection(), getProfesorDAO().getJSON(profs));
+
+            content = Files.readString(Paths.get(location, "imparten.json"), StandardCharsets.UTF_8);
+            JSONArray imp = new JSONObject(content).getJSONArray("imparten");
+            impartenDAO.batchInsert(getConnection(), impartenDAO.getJSON(imp));
         } catch (IOException e) {
             e.printStackTrace();
             return false;
