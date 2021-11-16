@@ -6,12 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="icon" fitHeight="150.0" fitWidth="150.0" layoutX="41.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/danger.png" />
+            <Image url="@../img/warning.png" />
          </image>
       </ImageView>
       <Label fx:id="texto" layoutX="241.0" layoutY="109.0" prefHeight="17.0" prefWidth="330.0" text="texto" />
