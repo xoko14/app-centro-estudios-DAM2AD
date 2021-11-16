@@ -112,4 +112,22 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    private void abrirDangerZone(ActionEvent ae){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/danger_zone.fxml"));
+        DangerZoneController c = new DangerZoneController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

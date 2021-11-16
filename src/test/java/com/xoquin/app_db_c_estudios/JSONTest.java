@@ -1,5 +1,7 @@
 package com.xoquin.app_db_c_estudios;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.SQLException;
 
 import com.xoquin.app_db_c_estudios.factory.MariaDBDAOFactory;
@@ -29,7 +31,7 @@ public class JSONTest {
     @Test
     public void volcar(){
         try {
-            db.volcarDB(db.getConnection(), "B:\\Documentos\\GitHub\\DAM2\\app-centro-estudios-DAM2AD\\target\\volcado");
+            db.volcarDB(db.getConnection(), "/home/xoquin/Documentos/Projects/app_db_c_estudios/target/volcado/");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +40,7 @@ public class JSONTest {
     @Test
     public void cargarVolcado(){
         try {
-            db.cargarVolcadoDB(db.getConnection(), "B:\\Documentos\\GitHub\\DAM2\\app-centro-estudios-DAM2AD\\target\\volcado");
+            db.cargarVolcadoDB(db.getConnection(), "/home/xoquin/Documentos/Projects/app_db_c_estudios/target/volcado/");
         } catch (SQLException e) {
             e.printStackTrace();
         }
