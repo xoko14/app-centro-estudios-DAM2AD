@@ -20,3 +20,6 @@ buildNumber.properties
 
 # Local History for Visual Studio Code
 .history/
+
+# General Java
+*.jar

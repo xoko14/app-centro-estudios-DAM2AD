@@ -1,21 +1,19 @@
 package com.xoquin.app_db_c_estudios.factory;
 
-import java.io.IOException;
+import java.util.Optional;
 
-import com.xoquin.app_db_c_estudios.controller.dialog.DialogController;
-import com.xoquin.app_db_c_estudios.controller.dialog.SiNoDialogController;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 public class DialogFactory {
-    public static final int SI_NO_DIALOG = 1;
+    public static final int YES_NO_DIALOG = 1;
+
+    public static final int RESULT_UNEXECUTED = -1;
+    public static final int RESULT_NO = 0;
+    public static final int RESULT_YES = 1;
 
     private int currentMode;
-    private String location;
-    private DialogController dc;
 
     private String text;
 
@@ -27,31 +25,38 @@ public class DialogFactory {
         this.text = text;
     }
 
-    public DialogFactory(int mode){
-        currentMode = mode;
+    private int result;
+
+    public int getResult() {
+        return result;
     }
 
-    public void launch(){
-        switch(currentMode){
-            case SI_NO_DIALOG:
-            location = "/fxml/yes_no_alert.fxml";
-            dc = new SiNoDialogController(text);
+    public DialogFactory(int mode) {
+        currentMode = mode;
+        result = RESULT_UNEXECUTED;
+    }
+
+    public void launch() {
+        switch (currentMode) {
+        case YES_NO_DIALOG:
+            createAlert();
             break;
         }
 
+        
+    }
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(location));
-        loader.setController(dc);
-        Parent root;
-        try {
-            root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void createAlert(){
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Alerta");
+        alert.setHeaderText("Confirmar");
+        alert.setContentText(text);
+
+        Optional<ButtonType> resultB = alert.showAndWait();
+        if (resultB.get() == ButtonType.OK) {
+            result = RESULT_YES;
+        } else {
+            result = RESULT_NO;
         }
     }
 }

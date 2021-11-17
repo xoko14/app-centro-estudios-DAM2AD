@@ -32,7 +32,7 @@ public class DangerZoneController extends DBViewController {
 
     @FXML
     public void borrar(ActionEvent ae){
-        DialogFactory df = new DialogFactory(DialogFactory.SI_NO_DIALOG);
+        DialogFactory df = new DialogFactory(DialogFactory.YES_NO_DIALOG);
         df.setText("De verdad quieres borrar la base de datos?");
         df.launch();
     }
