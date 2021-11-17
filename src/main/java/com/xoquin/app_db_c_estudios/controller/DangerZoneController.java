@@ -27,7 +27,7 @@ public class DangerZoneController extends DBViewController {
         chooser.setInitialDirectory(defaultDirectory);
         Stage stage = new Stage();
         File selectedDirectory = chooser.showDialog(stage);
-        txtVolcadoFolder.setText(selectedDirectory.toPath().toString());
+        if(selectedDirectory != null) txtVolcadoFolder.setText(selectedDirectory.toPath().toString());
     }
 
     @FXML
@@ -35,5 +35,8 @@ public class DangerZoneController extends DBViewController {
         DialogFactory df = new DialogFactory(DialogFactory.YES_NO_DIALOG);
         df.setText("De verdad quieres borrar la base de datos?");
         df.launch();
+        if(df.getResult() == DialogFactory.RESULT_YES){
+            System.out.println("borrando");
+        }
     }
 }
