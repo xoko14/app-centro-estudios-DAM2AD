@@ -96,7 +96,6 @@ public class DialogFactory {
         alert.setHeaderText("Ocorreu un erro");
         alert.setContentText(exception.getLocalizedMessage());
 
-        // Create expandable Exception.
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         exception.printStackTrace(pw);
@@ -118,7 +117,6 @@ public class DialogFactory {
         expContent.add(label, 0, 0);
         expContent.add(textArea, 0, 1);
 
-        // Set expandable Exception into the dialog pane.
         alert.getDialogPane().setExpandableContent(expContent);
 
         alert.showAndWait();
