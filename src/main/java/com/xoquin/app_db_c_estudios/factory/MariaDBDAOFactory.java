@@ -18,6 +18,7 @@ import com.xoquin.app_db_c_estudios.dao.DepartamentoDAO;
 import com.xoquin.app_db_c_estudios.dao.ImpartenDAO;
 import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
 import com.xoquin.app_db_c_estudios.pool.BasicConnectionPool;
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.json.JSONArray;
@@ -35,7 +36,7 @@ public class MariaDBDAOFactory extends DAOFactory{
         try {
             bcp = BasicConnectionPool.create(url, user, password);
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -87,7 +88,7 @@ public class MariaDBDAOFactory extends DAOFactory{
             Reader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/sql/init_db.sql")));
             sr.runScript(reader);
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
             return false;
         }
         return true;
@@ -100,7 +101,7 @@ public class MariaDBDAOFactory extends DAOFactory{
             Reader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/sql/clear_db.sql")));
             sr.runScript(reader);
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
             return false;
         }
         return true;
@@ -135,7 +136,7 @@ public class MariaDBDAOFactory extends DAOFactory{
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return true;
     }
@@ -164,10 +165,10 @@ public class MariaDBDAOFactory extends DAOFactory{
             JSONArray imp = new JSONObject(content).getJSONArray("imparten");
             impartenDAO.batchInsert(getConnection(), impartenDAO.getJSON(imp));
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return true;
     }

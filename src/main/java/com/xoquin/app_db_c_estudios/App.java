@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application{
@@ -23,7 +24,7 @@ public class App extends Application{
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        //primaryStage.getIcons().add(new Image(getclass stuff))
+        primaryStage.getIcons().add(new Image("/img/icon.png"));
         primaryStage.setTitle("DB Browser");
         primaryStage.show();
     }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.xoquin.app_db_c_estudios.dao.AlumnoDAO;
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Alumno;
 
 import javafx.beans.value.ChangeListener;
@@ -72,7 +73,7 @@ public class BuscarAlumnosController extends DBViewController implements Initial
         try {
             als.add(db.getAlumnoDAO().get(db.getConnection(), id));
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -82,7 +83,7 @@ public class BuscarAlumnosController extends DBViewController implements Initial
         try {
             als = db.getAlumnoDAO().getByDNI(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -92,7 +93,7 @@ public class BuscarAlumnosController extends DBViewController implements Initial
         try {
             als = db.getAlumnoDAO().getByRowLike(db.getConnection(), row, txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -102,7 +103,7 @@ public class BuscarAlumnosController extends DBViewController implements Initial
         try {
             als = db.getAlumnoDAO().getByYear(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -112,7 +113,7 @@ public class BuscarAlumnosController extends DBViewController implements Initial
         try {
             als = db.getAlumnoDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabAlumnos.getItems().setAll(als);
     }

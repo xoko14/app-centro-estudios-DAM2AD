@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Departamento;
 
 import javafx.beans.value.ChangeListener;
@@ -59,7 +60,7 @@ public class BuscarDepartamentosController extends DBViewController implements I
         try {
             depts = db.getDepartamentoDAO().getByName(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabDepartamentos.getItems().setAll(depts);
     }
@@ -69,7 +70,7 @@ public class BuscarDepartamentosController extends DBViewController implements I
         try {
             depts = db.getDepartamentoDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabDepartamentos.getItems().setAll(depts);
     }

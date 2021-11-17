@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Profesor;
 
 import org.json.JSONArray;
@@ -33,7 +34,7 @@ public class ProfesorDAO implements Dao<Profesor> {
             pro.setDepartamento(rs.getString("departamento"));
             pro.setDepartamentoId(rs.getInt("id_departamento"));
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return pro;
     }
@@ -55,7 +56,7 @@ public class ProfesorDAO implements Dao<Profesor> {
                 lista.add(pro);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -77,7 +78,7 @@ public class ProfesorDAO implements Dao<Profesor> {
                 lista.add(pro);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -99,7 +100,7 @@ public class ProfesorDAO implements Dao<Profesor> {
                 lista.add(pro);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -134,7 +135,7 @@ public class ProfesorDAO implements Dao<Profesor> {
             }
             s.executeBatch();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 

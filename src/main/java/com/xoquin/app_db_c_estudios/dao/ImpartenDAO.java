@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xoquin.app_db_c_estudios.dao.ImpartenDAO.Imparten;
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ public class ImpartenDAO implements Dao<Imparten> {
                 lista.add(item);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -69,7 +70,7 @@ public class ImpartenDAO implements Dao<Imparten> {
             }
             s.executeBatch();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 

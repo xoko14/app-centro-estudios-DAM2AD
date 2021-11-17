@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.xoquin.app_db_c_estudios.dao.ProfesorDAO;
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Profesor;
 
 import javafx.beans.value.ChangeListener;
@@ -67,7 +68,7 @@ public class BuscarProfesoresController extends DBViewController implements Init
         try {
             profs = db.getProfesorDAO().getByDNI(db.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         tabProfesores.getItems().setAll(profs);
     }
@@ -77,7 +78,7 @@ public class BuscarProfesoresController extends DBViewController implements Init
       try {
           profs = db.getProfesorDAO().getByRowLike(db.getConnection(), row, txtBusqueda.getText());
       } catch (SQLException e) {
-          e.printStackTrace();
+          ExceptionHandler.handle(e);
       }
       tabProfesores.getItems().setAll(profs);
   }

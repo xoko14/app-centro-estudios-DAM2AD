@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -34,9 +37,11 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Buscar Alumnos");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -52,9 +57,11 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Buscar Profesores");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -70,9 +77,11 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Buscar Departamentos");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -88,9 +97,11 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Buscar Asignaturas");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -106,9 +117,11 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Crear Alumnos");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -124,9 +137,11 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Xestionar Base de Datos");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 

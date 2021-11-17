@@ -2,6 +2,9 @@ package com.xoquin.app_db_c_estudios.controller;
 
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,6 +37,7 @@ public class CrearAlumnosController extends DBViewController{
         try {
             result = db.getAlumnoDAO().newAlumno(db.getConnection(), dni, nombre, apellidos, fecha);
         } catch (SQLException e) {
+            ExceptionHandler.handle(e);
             result = false;
         }
 

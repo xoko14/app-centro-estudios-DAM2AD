@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Asignatura;
 
 import org.json.JSONArray;
@@ -27,7 +28,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
             asig.setNombre(rs.getString("nombre"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return asig;
     }
@@ -45,7 +46,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
                 lista.add(asig);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -63,7 +64,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
                 lista.add(asig);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -81,7 +82,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
                 lista.add(asig);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -99,7 +100,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
                 lista.add(asig);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -128,7 +129,7 @@ public class AsignaturaDAO implements Dao<Asignatura> {
             }
             s.executeBatch();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 

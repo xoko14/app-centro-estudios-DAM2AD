@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Alumno;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class AlumnoDAO implements Dao<Alumno> {
             al.setApellidos(rs.getString("apellidos"));
             al.setFecha(rs.getDate("fecha_nac"));
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return al;
     }
@@ -53,7 +54,7 @@ public class AlumnoDAO implements Dao<Alumno> {
                 lista.add(al);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -74,7 +75,7 @@ public class AlumnoDAO implements Dao<Alumno> {
                 lista.add(al);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -95,7 +96,7 @@ public class AlumnoDAO implements Dao<Alumno> {
                 lista.add(al);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -116,7 +117,7 @@ public class AlumnoDAO implements Dao<Alumno> {
                 lista.add(al);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -138,7 +139,7 @@ public class AlumnoDAO implements Dao<Alumno> {
                 lista.add(al);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
         return lista;
     }
@@ -188,7 +189,7 @@ public class AlumnoDAO implements Dao<Alumno> {
             }
             s.executeBatch();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.xoquin.app_db_c_estudios.util.ExceptionHandler;
 import com.xoquin.app_db_c_estudios.vo.Asignatura;
 
 import javafx.beans.value.ChangeListener;
@@ -63,7 +64,7 @@ public class BuscarAsignaturasController extends DBViewController implements Ini
     try {
       depts = db.getAsignaturaDAO().getByName(db.getConnection(), txtBusqueda.getText());
     } catch (SQLException e) {
-      e.printStackTrace();
+      ExceptionHandler.handle(e);
     }
     tabAsignaturas.getItems().setAll(depts);
   }
@@ -73,7 +74,7 @@ public class BuscarAsignaturasController extends DBViewController implements Ini
     try {
       depts = db.getAsignaturaDAO().getByProfesor(db.getConnection(), txtBusqueda.getText());
     } catch (SQLException e) {
-      e.printStackTrace();
+      ExceptionHandler.handle(e);
     }
     tabAsignaturas.getItems().setAll(depts);
   }
@@ -83,7 +84,7 @@ public class BuscarAsignaturasController extends DBViewController implements Ini
     try {
       depts = db.getAsignaturaDAO().getByAlumno(db.getConnection(), txtBusqueda.getText());
     } catch (SQLException e) {
-      e.printStackTrace();
+      ExceptionHandler.handle(e);
     }
     tabAsignaturas.getItems().setAll(depts);
   }

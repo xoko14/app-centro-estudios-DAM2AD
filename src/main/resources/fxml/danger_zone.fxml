@@ -10,12 +10,12 @@
    <children>
       <AnchorPane prefHeight="269.0" prefWidth="311.0">
          <children>
-            <Button fx:id="btnInicializar" layoutX="67.0" layoutY="42.0" mnemonicParsing="false" text="Inicializar base de datos" />
-            <Button fx:id="btnBorrar" layoutX="77.0" layoutY="82.0" mnemonicParsing="false" onAction="#borrar" text="Borrar base de datos" />
-            <TextField fx:id="txtVolcadoFolder" layoutX="14.0" layoutY="160.0" prefHeight="29.0" prefWidth="182.0" />
+            <Button fx:id="btnInicializar" layoutX="83.0" layoutY="40.0" mnemonicParsing="false" onAction="#init" text="Inicializar base de datos" />
+            <Button fx:id="btnBorrar" layoutX="93.0" layoutY="82.0" mnemonicParsing="false" onAction="#borrar" text="Borrar base de datos" />
+            <TextField fx:id="txtVolcadoFolder" editable="false" layoutX="14.0" layoutY="160.0" prefHeight="29.0" prefWidth="182.0" />
             <Button fx:id="btnSeleccionar" layoutX="202.0" layoutY="160.0" mnemonicParsing="false" onAction="#seleccionarCarpeta" prefHeight="28.0" prefWidth="95.0" text="Seleccionar" />
-            <Button fx:id="btnVolcar" layoutX="43.0" layoutY="211.0" mnemonicParsing="false" text="Volcar BD" />
-            <Button fx:id="btnCargarVolcado" layoutX="164.0" layoutY="211.0" mnemonicParsing="false" text="Cargar volcado" />
+            <Button fx:id="btnVolcar" layoutX="43.0" layoutY="211.0" mnemonicParsing="false" onAction="#volcar" text="Volcar BD" />
+            <Button fx:id="btnCargarVolcado" layoutX="164.0" layoutY="211.0" mnemonicParsing="false" onAction="#cargarVolcado" text="Cargar volcado" />
             <Separator layoutX="4.0" layoutY="134.0" prefWidth="300.0" />
          </children>
       </AnchorPane>
