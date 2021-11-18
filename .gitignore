@@ -25,3 +25,6 @@ buildNumber.properties
 
 # General Java
 *.jar
+
+# Other
+volcado/
