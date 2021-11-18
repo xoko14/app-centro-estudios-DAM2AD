@@ -154,4 +154,18 @@ public class ProfesorDAO implements Dao<Profesor> {
         return list;
     }
 
+    public void newProfesor(Connection conn, String dni, String nombre, String apellidos, int departamento){
+        try {
+            PreparedStatement s = conn
+                    .prepareStatement("insert into profesores (dni, nombre, apellidos, departamento) values (?, ?, ?, ?)");
+            s.setString(1, dni);
+            s.setString(2, nombre);
+            s.setString(3, apellidos);
+            s.setInt(4, departamento);
+            s.executeUpdate();
+        } catch (SQLException e) {
+            ExceptionHandler.handle(e);
+        }
+    }
+
 }

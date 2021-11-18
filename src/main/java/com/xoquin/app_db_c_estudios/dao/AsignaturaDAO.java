@@ -144,4 +144,15 @@ public class AsignaturaDAO implements Dao<Asignatura> {
         });
         return list;
     }
+
+    public void newAsignatura(Connection conn, String nombre){
+        try {
+            PreparedStatement s = conn
+                    .prepareStatement("insert into asignaturas (nombre) values (?)");
+            s.setString(1, nombre);
+            s.executeUpdate();
+        } catch (SQLException e) {
+            ExceptionHandler.handle(e);
+        }
+    }
 }

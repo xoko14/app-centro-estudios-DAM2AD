@@ -44,11 +44,13 @@ public class BuscarAlumnosController extends DBViewController implements Initial
         colApellidos.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellidos"));
         colNac.setCellValueFactory(new PropertyValueFactory<Alumno, Date>("fecha"));
 
-        cbxBuscarPor.getItems().setAll("Número de expediente", "DNI", "Nombre", "Apellidos", "Año de nacimiento", "DNI de profesor");
+        cbxBuscarPor.getItems().setAll("Todos", "Número de expediente", "DNI", "Nombre", "Apellidos", "Año de nacimiento", "DNI de profesor");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
               selectedItem = newI;
+              if(selectedItem.equals("Todos")) txtBusqueda.disableProperty().set(true);
+              else txtBusqueda.disableProperty().set(false);
             }
           });
     }
@@ -57,14 +59,25 @@ public class BuscarAlumnosController extends DBViewController implements Initial
     private void buscar(ActionEvent ae){
         if (selectedItem != null) {
             switch(selectedItem) {
-              case "Número de expediente": findByID(); break;
-              case "DNI": findByDNI(); break;
-              case "Nombre": findByRowLike(AlumnoDAO.ROW_NOMBRE); break;
-              case "Apellidos": findByRowLike(AlumnoDAO.ROW_APELLIDOS); break;
-              case "Año de nacimiento": findByAnho(); break;
-              case "DNI de profesor": findByProfesor(); break;
+                case "Todos": findAll(); break; 
+                case "Número de expediente": findByID(); break;
+                case "DNI": findByDNI(); break;
+                case "Nombre": findByRowLike(AlumnoDAO.ROW_NOMBRE); break;
+                case "Apellidos": findByRowLike(AlumnoDAO.ROW_APELLIDOS); break;
+                case "Año de nacimiento": findByAnho(); break;
+                case "DNI de profesor": findByProfesor(); break;
             }
           }
+    }
+
+    private void findAll(){
+        List<Alumno> als = new ArrayList<>();
+        try {
+            als = db.getAlumnoDAO().getAll(db.getConnection());
+        } catch (SQLException e) {
+            ExceptionHandler.handle(e);
+        }
+        tabAlumnos.getItems().setAll(als);
     }
 
     private void findByID(){

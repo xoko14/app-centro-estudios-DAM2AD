@@ -152,7 +152,7 @@ public class AlumnoDAO implements Dao<Alumno> {
             s.setString(2, nombre);
             s.setString(3, apellidos);
             s.setString(4, fecha);
-            s.execute();
+            s.executeUpdate();
         } catch (SQLException e) {
             return false;
         }

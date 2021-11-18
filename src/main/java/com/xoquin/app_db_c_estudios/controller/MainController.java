@@ -145,4 +145,61 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    private void abrirCrearProfesores(ActionEvent ae){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/crear_profesores.fxml"));
+        CrearProfesoresController c = new CrearProfesoresController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Crear Profesores");
+            stage.show();
+        } catch (IOException e) {
+            ExceptionHandler.handle(e);
+        }
+    }
+    @FXML
+    private void abrirCrearDepartamentos(ActionEvent ae){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/crear_departamentos.fxml"));
+        CrearDepartamentosController c = new CrearDepartamentosController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Crear Departamentos");
+            stage.show();
+        } catch (IOException e) {
+            ExceptionHandler.handle(e);
+        }
+    }
+    @FXML
+    private void abrirCrearAsignaturas(ActionEvent ae){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/crear_asignaturas.fxml"));
+        CrearAsignaturasController c = new CrearAsignaturasController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/icon.png"));
+            stage.setTitle("Crear Asignaturas");
+            stage.show();
+        } catch (IOException e) {
+            ExceptionHandler.handle(e);
+        }
+    }
 }

@@ -36,11 +36,13 @@ public class BuscarDepartamentosController extends DBViewController implements I
         colNombre.setCellValueFactory(new PropertyValueFactory<Departamento, String>("nombre"));
         colNumProf.setCellValueFactory(new PropertyValueFactory<Departamento, String>("numProf"));
 
-        cbxBuscarPor.getItems().setAll("Nombre", "DNI de profesor");
+        cbxBuscarPor.getItems().setAll("Todos", "Nombre", "DNI de profesor");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
-              selectedItem = newI;
+                selectedItem = newI;
+                if(selectedItem.equals("Todos")) txtBusqueda.disableProperty().set(true);
+                else txtBusqueda.disableProperty().set(false);
             }
           });
     }
@@ -49,10 +51,21 @@ public class BuscarDepartamentosController extends DBViewController implements I
     private void buscar(ActionEvent ae){
         if (selectedItem != null) {
             switch(selectedItem) {
-              case "Nombre": findByName(); break;
-              case "DNI de profesor": findByProfesor(); break;
+                case "Todos": findAll(); break; 
+                case "Nombre": findByName(); break;
+                case "DNI de profesor": findByProfesor(); break;
             }
           }
+    }
+
+    private void findAll(){
+        List<Departamento> depts = new ArrayList<>();
+        try {
+            depts = db.getDepartamentoDAO().getAll(db.getConnection());
+        } catch (SQLException e) {
+            ExceptionHandler.handle(e);
+        }
+        tabDepartamentos.getItems().setAll(depts);
     }
 
     private void findByName(){

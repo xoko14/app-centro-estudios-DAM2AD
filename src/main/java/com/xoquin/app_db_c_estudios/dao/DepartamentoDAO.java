@@ -131,4 +131,15 @@ public class DepartamentoDAO implements Dao<Departamento> {
         return list;
     }
 
+    public void newDepartamento(Connection conn, String nombre){
+        try {
+            PreparedStatement s = conn
+                    .prepareStatement("insert into departamentos (nombre) values (?)");
+            s.setString(1, nombre);
+            s.executeUpdate();
+        } catch (SQLException e) {
+            ExceptionHandler.handle(e);
+        }
+    }
+
 }

@@ -39,11 +39,13 @@ public class BuscarAsignaturasController extends DBViewController implements Ini
   public void initialize(URL arg0, ResourceBundle arg1) {
     colNombre.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("nombre"));
 
-    cbxBuscarPor.getItems().setAll("Nombre", "DNI de profesor", "Número de expediente de alumno");
+    cbxBuscarPor.getItems().setAll("Todos", "Nombre", "DNI de profesor", "Número de expediente de alumno");
     cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
       @Override
       public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
         selectedItem = newI;
+        if(selectedItem.equals("Todos")) txtBusqueda.disableProperty().set(true);
+        else txtBusqueda.disableProperty().set(false);
       }
     });
   }
@@ -52,11 +54,22 @@ public class BuscarAsignaturasController extends DBViewController implements Ini
   private void buscar(ActionEvent ae) {
     if (selectedItem != null) {
       switch (selectedItem) {
+      case "Todos": findAll(); break; 
       case "Nombre": findByName(); break;
       case "DNI de profesor": findByProfesor(); break;
       case "Número de expediente de alumno": findByAlumno(); break;
       }
     }
+  }
+
+  private void findAll(){
+    List<Asignatura> depts = new ArrayList<>();
+    try {
+      depts = db.getAsignaturaDAO().getAll(db.getConnection());
+    } catch (SQLException e) {
+      ExceptionHandler.handle(e);
+    }
+    tabAsignaturas.getItems().setAll(depts);
   }
 
   private void findByName() {

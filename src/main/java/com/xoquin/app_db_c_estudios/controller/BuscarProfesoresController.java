@@ -42,11 +42,13 @@ public class BuscarProfesoresController extends DBViewController implements Init
         colApellidos.setCellValueFactory(new PropertyValueFactory<Profesor, String>("apellidos"));
         colDept.setCellValueFactory(new PropertyValueFactory<Profesor, Date>("departamento"));
 
-        cbxBuscarPor.getItems().setAll("DNI", "Nombre", "Apellidos", "Departamento");
+        cbxBuscarPor.getItems().setAll("Todos", "DNI", "Nombre", "Apellidos", "Departamento");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
               selectedItem = newI;
+              if(selectedItem.equals("Todos")) txtBusqueda.disableProperty().set(true);
+              else txtBusqueda.disableProperty().set(false);
             }
           });
     }
@@ -55,12 +57,23 @@ public class BuscarProfesoresController extends DBViewController implements Init
     private void buscar(ActionEvent ae){
         if (selectedItem != null) {
             switch(selectedItem) {
+              case "Todos": findAll(); break; 
               case "DNI": findByDNI(); break;
               case "Nombre": findByRowLike(ProfesorDAO.ROW_NOMBRE); break;
               case "Apellidos": findByRowLike(ProfesorDAO.ROW_APELLIDOS); break;
               case "Departamento": findByRowLike(ProfesorDAO.ROW_DEPARTAMENTO); break;
             }
           }
+    }
+
+    private void findAll(){
+      List<Profesor> profs = new ArrayList<>();
+        try {
+            profs = db.getProfesorDAO().getAll(db.getConnection());
+        } catch (SQLException e) {
+            ExceptionHandler.handle(e);
+        }
+        tabProfesores.getItems().setAll(profs);
     }
 
     private void findByDNI(){

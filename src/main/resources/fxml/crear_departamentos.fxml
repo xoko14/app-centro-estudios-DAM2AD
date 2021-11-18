@@ -41,8 +41,8 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="158.0" prefWidth="313.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="254.0" layoutY="124.0" mnemonicParsing="false" text="Crear" />
-            <TextField layoutX="16.0" layoutY="14.0" prefHeight="25.0" prefWidth="281.0" promptText="Nome" />
+            <Button layoutX="254.0" layoutY="124.0" mnemonicParsing="false" onAction="#darAlta" text="Crear" />
+            <TextField fx:id="txtNome" layoutX="16.0" layoutY="14.0" prefHeight="25.0" prefWidth="281.0" promptText="Nome" />
       </children>
     </AnchorPane>
   </children>
