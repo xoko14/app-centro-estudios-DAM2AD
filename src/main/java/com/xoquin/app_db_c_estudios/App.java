@@ -26,7 +26,7 @@ public class App extends Application{
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image("/img/icon.png"));
-        primaryStage.setTitle("DB Browser");
+        primaryStage.setTitle("Menú");
         primaryStage.show();
     }
 }
