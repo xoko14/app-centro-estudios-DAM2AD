@@ -21,6 +21,10 @@ public class CrearAlumnosController extends DBViewController{
 
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    /**
+     * Colle os valores da vista e, se non están baleiros, inserta un novo alumno.
+     * @param ae ActionEvent
+     */
     @FXML
     private void darAlta(ActionEvent ae){
         String dni = txtDNI.getText();

@@ -13,6 +13,10 @@ public class CrearAsignaturasController extends DBViewController{
     
     @FXML TextField txtNome;
 
+    /**
+     * Colle os valores da vista e, se non están baleiros, inserta unha nova asignatura.
+     * @param ae ActionEvent
+     */
     @FXML
     private void darAlta(ActionEvent ae){
         if(!txtNome.getText().isBlank()){

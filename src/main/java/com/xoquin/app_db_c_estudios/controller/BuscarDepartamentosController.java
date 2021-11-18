@@ -31,6 +31,9 @@ public class BuscarDepartamentosController extends DBViewController implements I
 
     private String selectedItem = null;
 
+    /**
+     * Inicializa componentes.
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         colNombre.setCellValueFactory(new PropertyValueFactory<Departamento, String>("nombre"));
@@ -47,6 +50,10 @@ public class BuscarDepartamentosController extends DBViewController implements I
           });
     }
 
+    /**
+     * Realiza a búsqueda segundo o escollido na vista.
+     * @param ae ActionEvent
+     */
     @FXML
     private void buscar(ActionEvent ae){
         if (selectedItem != null) {

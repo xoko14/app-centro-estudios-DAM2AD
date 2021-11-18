@@ -14,6 +14,9 @@ public class App extends Application{
         launch(args);
     }
 
+    /**
+     * Carga a vista e lanza a ventana
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();

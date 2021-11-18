@@ -63,6 +63,10 @@ public class CrearProfesoresController extends DBViewController implements Initi
 
     }
 
+    /**
+     * Colle os valores da vista e, se non están baleiros, inserta un novo profesor.
+     * @param ae ActionEvent
+     */
     @FXML
     private void darAlta(ActionEvent ae) {
         if (currentDept != null && !txtDNI.getText().isBlank() && !txtNome.getText().isBlank() && !txtApelidos.getText().isBlank()) {

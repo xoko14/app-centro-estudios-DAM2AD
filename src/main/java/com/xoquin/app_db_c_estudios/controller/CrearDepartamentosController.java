@@ -13,6 +13,10 @@ public class CrearDepartamentosController extends DBViewController{
 
     @FXML TextField txtNome;
 
+    /**
+     * Colle os valores da vista e, se non están baleiros, inserta un novo departamento.
+     * @param ae ActionEvent
+     */
     @FXML
     private void darAlta(ActionEvent ae){
         if(!txtNome.getText().isBlank()){

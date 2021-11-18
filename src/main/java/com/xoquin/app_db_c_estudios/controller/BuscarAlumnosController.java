@@ -36,6 +36,9 @@ public class BuscarAlumnosController extends DBViewController implements Initial
 
     private String selectedItem = null;
 
+    /**
+     * Inicializa componentes.
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         colNum.setCellValueFactory(new PropertyValueFactory<Alumno, Integer>("numExp"));
@@ -55,6 +58,10 @@ public class BuscarAlumnosController extends DBViewController implements Initial
           });
     }
 
+    /**
+     * Realiza a búsqueda segundo o escollido na vista.
+     * @param ae ActionEvent
+     */
     @FXML
     private void buscar(ActionEvent ae){
         if (selectedItem != null) {
