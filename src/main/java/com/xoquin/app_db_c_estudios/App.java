@@ -15,7 +15,7 @@ public class App extends Application{
     }
 
     /**
-     * Carga a vista e lanza a ventana
+     * Carga a vista e lanza a ventá
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
