@@ -16,6 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * Este controlador abre as distintas vistas segundo o botón accionado.
+ */
 public class MainController implements Initializable {
     @FXML
     private Button btnBuscarAlumnos;
