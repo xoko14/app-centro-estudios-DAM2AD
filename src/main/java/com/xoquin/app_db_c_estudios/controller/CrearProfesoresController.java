@@ -31,6 +31,9 @@ public class CrearProfesoresController extends DBViewController implements Initi
     private List<Departamento> departamentos;
     Departamento currentDept = null;
 
+    /**
+     * Inicializa a vista cargando os departamentos da base de datos no selector de departamentos.
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {

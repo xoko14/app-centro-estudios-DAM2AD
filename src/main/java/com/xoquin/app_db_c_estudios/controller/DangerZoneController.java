@@ -27,6 +27,10 @@ public class DangerZoneController extends DBViewController {
     @FXML
     TextField txtVolcadoFolder;
 
+    /**
+     * Abre o diálogo de selección de carpeta e establece a carpeta do volcado.
+     * @param ae
+     */
     @FXML
     public void seleccionarCarpeta(ActionEvent ae) {
         DirectoryChooser chooser = new DirectoryChooser();
@@ -39,6 +43,10 @@ public class DangerZoneController extends DBViewController {
             txtVolcadoFolder.setText(selectedDirectory.toPath().toString());
     }
 
+    /**
+     * Borra as tablas da base de datos.
+     * @param ae
+     */
     @FXML
     public void borrar(ActionEvent ae) {
         DialogFactory df = new DialogFactory(DialogFactory.YES_NO_DIALOG);
@@ -49,6 +57,10 @@ public class DangerZoneController extends DBViewController {
         }
     }
 
+    /**
+     * Inicializa as tablas da base de datos.
+     * @param ae
+     */
     @FXML
     public void init(ActionEvent ae) {
         DialogFactory df = new DialogFactory(DialogFactory.YES_NO_DIALOG);
@@ -59,6 +71,9 @@ public class DangerZoneController extends DBViewController {
         }
     }
 
+    /**
+     * Volcar as tablas na ruta seleccionada.
+     */
     @FXML
     public void volcar() {
         if(comprobarRuta()){
@@ -79,6 +94,9 @@ public class DangerZoneController extends DBViewController {
         }
     }
 
+    /**
+     * Cargar os datos do volcado da ruta especificada.
+     */
     @FXML
     public void cargarVolcado(){
         if(comprobarRuta()){
