@@ -47,11 +47,11 @@
             <Button fx:id="btnBuscar" layoutX="546.0" layoutY="14.0" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="80.0" text="Buscar" />
             <TableView fx:id="tabAlumnos" layoutX="14.0" layoutY="53.0" prefHeight="334.0" prefWidth="612.0">
               <columns>
-                <TableColumn fx:id="colNum" prefWidth="82.0" text="Número de expediente" />
-                  <TableColumn fx:id="colDNI" minWidth="0.0" prefWidth="75.0" text="DNI" />
-                  <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="68.0" text="Nombre" />
-                  <TableColumn fx:id="colApellidos" prefWidth="75.0" text="Apellidos" />
-                  <TableColumn fx:id="colNac" prefWidth="75.0" text="Fecha nacimiento" />
+                <TableColumn fx:id="colNum" prefWidth="143.0" text="Número de expediente" />
+                  <TableColumn fx:id="colDNI" minWidth="0.0" prefWidth="77.0" text="DNI" />
+                  <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="101.0" text="Nombre" />
+                  <TableColumn fx:id="colApellidos" prefWidth="127.0" text="Apellidos" />
+                  <TableColumn fx:id="colNac" prefWidth="110.0" text="Fecha nacimiento" />
               </columns>
             </TableView>
             <ComboBox fx:id="cbxBuscarPor" layoutX="14.0" layoutY="14.0" prefWidth="150.0" promptText="Buscar por" />

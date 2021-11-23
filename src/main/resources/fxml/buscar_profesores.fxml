@@ -49,8 +49,8 @@
               <columns>
                   <TableColumn fx:id="colDNI" minWidth="0.0" prefWidth="84.0" text="DNI" />
                   <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="71.0" text="Nombre" />
-                  <TableColumn fx:id="colApellidos" prefWidth="99.0" text="Apellidos" />
-                  <TableColumn fx:id="colDept" prefWidth="106.0" text="Departamento" />
+                  <TableColumn fx:id="colApellidos" prefWidth="164.0" text="Apellidos" />
+                  <TableColumn fx:id="colDept" prefWidth="105.0" text="Departamento" />
               </columns>
             </TableView>
             <ComboBox fx:id="cbxBuscarPor" layoutX="14.0" layoutY="14.0" prefWidth="150.0" promptText="Buscar por" />
