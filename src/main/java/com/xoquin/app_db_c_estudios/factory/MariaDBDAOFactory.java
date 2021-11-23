@@ -81,6 +81,9 @@ public class MariaDBDAOFactory extends DAOFactory{
         return new ProfesorDAO();
     }
 
+    /**
+     * Crea as táboas da base de datos.
+     */
     @Override
     public boolean createDB() {
         try {
@@ -94,6 +97,9 @@ public class MariaDBDAOFactory extends DAOFactory{
         return true;
     }
 
+    /**
+     * Borra as táboas da base de datos.
+     */
     @Override
     public boolean clearDB() {
         try {
@@ -107,6 +113,9 @@ public class MariaDBDAOFactory extends DAOFactory{
         return true;
     }
 
+    /**
+     * Volca os contidos das táboas a arquivos JSON.
+     */
     @Override
     public boolean volcarDB(Connection conn, String location) {
         Writer writer;
@@ -141,6 +150,9 @@ public class MariaDBDAOFactory extends DAOFactory{
         return true;
     }
 
+    /**
+     * Carga o volcado desde arquivos JSON.
+     */
     @Override
     public boolean cargarVolcadoDB(Connection conn, String location) {
         String content;

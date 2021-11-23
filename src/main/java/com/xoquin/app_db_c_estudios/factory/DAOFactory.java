@@ -29,11 +29,6 @@ public abstract class DAOFactory {
     public abstract boolean cargarVolcadoDB(Connection conn, String location);
 
 
-
-    /*
-     * public abstract DepartamentoDAO getDepartamentoDAO(); public abstract
-     * ProyectoDAO getProyectoDAO(); public abstract FamiliarDAO getFamiliarDAO();
-     */
     public static DAOFactory getDAOFactory(int whichFactory) {
 
         switch (whichFactory) {
